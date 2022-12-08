@@ -5,6 +5,8 @@ Functions that do:
 [ToDo]: get the rows IDs of any "failed" checks
 [ToDo]: apply the above across a dataframe to designated columns returning column and row IDs of failures.
 '''
+import pandas as pd
+import numpy as np 
 
 def check_series_sdc(column: pd.Series) -> pd.Series:
     '''Checks the series following the disclosure control rules
