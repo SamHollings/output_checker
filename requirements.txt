@@ -6,3 +6,7 @@ pytest
 python-dotenv
 Sphinx
 toml
+pandas
+black
+flake8
+pylint
