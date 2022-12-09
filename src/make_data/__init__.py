@@ -26,7 +26,7 @@ def test_data() -> pd.DataFrame:
                 """I thought Doctor Smith, who lived at 1 privett drive, was
                 very friendly xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx""",
                 "b",
-                "c",
+                "c                Hidden Records ID12345678911 95AA02W1	 H00 V01 Z02 C05 F02 ",
                 None,
             ],
         )
