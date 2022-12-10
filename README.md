@@ -1,18 +1,24 @@
 # `output_checker`
+![Build](https://github.com/SamHollings/output_checker/actions/workflows/lint.yml/badge.svg)[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Code to automatically flag bad outputs
+`output_checker` is a tool that allows **analysts** to check if their **code is ok to
+export**
 
-```{warning}
-Where this documentation refers to the root folder we mean where this README.md is
-located.
+It does this by running a few simple checks. The envisaged workflow is:
+```mermaid
+graph LR
+    A[Statistical Disclosure Control] --> B{Values below a threshold?};
+    A --> C{Values not rounded?};
+    B -->|Pass| D[Ok to output];
+    B -->|Fail| E[Identifies problems];
+    B -->|Pass| D[Ok to output];
+    B -->|Fail| E[Identifies problems];
 ```
 
 ## Getting started
 
 To start using this project, [first make sure your system meets its
 requirements](#requirements).
-
-To be added.
 
 ### Requirements
 

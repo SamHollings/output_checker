@@ -1,6 +1,6 @@
 # Code of conduct for `output_checker`
 
-Contributors to this repository hosted by `NHSDigital` are expected to follow the
+Contributors to this repository hosted by `nhsdigital` are expected to follow the
 Contributor Covenant Code of Conduct, and those working within Her Majesty's Government
 are also expected to follow the Civil Service Code.
 
@@ -16,8 +16,8 @@ Code][civil-service-code], and are expected to follow it in their contributions.
 Where this Code of Conduct says:
 
 - "Project", we mean this `output_checker` GitHub repository;
-- "Maintainer", we mean the `NHSDigital` organisation owners; and
-- "Leadership", we mean both `NHSDigital` organisation owners, line managers, and other
+- "Maintainer", we mean the `nhsdigital` organisation owners; and
+- "Leadership", we mean both `nhsdigital` organisation owners, line managers, and other
   leadership within the NHS Digital.
 
 ### Our Pledge
@@ -73,7 +73,7 @@ further defined and clarified by project maintainers.
 
 Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by
 contacting the project team at
-[sam.hollings1@gmail.com][email-address]. All complaints will be
+[sam.hollings1@nhs.net][email-address]. All complaints will be
 reviewed and investigated and will result in a response that is deemed necessary and
 appropriate to the circumstances. The project team is obligated to maintain
 confidentiality with regard to the reporter of an incident. Further details of
@@ -95,4 +95,4 @@ and the `alphagov` Code of Conduct available at
 [civil-service-code]: https://www.gov.uk/government/publications/civil-service-code/the-civil-service-code
 [contributor-covenant]: https://www.contributor-covenant.org
 [contributor-covenant-code-of-conduct]: https://www.contributor-covenant.org/version/1/4/code-of-conduct/
-[email-address]: mailto:sam.hollings1@gmail.com
+[email-address]: mailto:sam.hollings1@nhs.net
