@@ -78,7 +78,7 @@ wishes to commit the to repository.
 ### `CODE_OF_CONDUCT.md`
 
 [The Code of Conduct for contributors to this project][code-of-conduct], including
-maintainers and `NHSDigital` organisation owners.
+maintainers and `nhsdigital` organisation owners.
 
 ### `conftest.py`
 
