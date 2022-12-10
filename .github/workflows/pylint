@@ -1,0 +1,33 @@
+name: pylint
+
+on:
+  #push:
+  #  branches:
+  #  - master
+  #pull_request:
+  #  branches:
+  #  - master
+  workflow_dispatch:
+jobs:
+  lint-code:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pylint pylint-exit anybadge
+    - name: Analysing the code with pylint
+      run: |
+        mkdir ./pylint       
+        pylint $(git ls-files '*.py') --output-format=text . | tee ./pylint/pylint.log || pylint-exit $?
+        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./pylint/pylint.log)
+        anybadge --label=Pylint --file=pylint/pylint.svg --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
+        echo "Pylint score is $PYLINT_SCORE"
+    - name: upload pylint badge
+        # this brings the badge outside of the action environment so we can use it on the Readme.md
+        uses: actions/upload-artifact@v3
+        with:
+          name: pylint-badge
+          path: pylint/pylint.svg
