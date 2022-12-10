@@ -11,8 +11,8 @@ graph LR
     A --> C{Values not rounded?};
     B -->|Pass| D[Ok to output];
     B -->|Fail| E[Identifies problems];
-    B -->|Pass| D[Ok to output];
-    B -->|Fail| E[Identifies problems];
+    C -->|Pass| D[Ok to output];
+    C -->|Fail| E[Identifies problems];
 ```
 
 ## Getting started
