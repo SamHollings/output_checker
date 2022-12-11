@@ -1,12 +1,12 @@
 name: pylint
 
 on:
-  #push:
-  #  branches:
-  #  - master
-  #pull_request:
-  #  branches:
-  #  - master
+  push:
+   branches:
+   - master
+  pull_request:
+   branches:
+   - master
   workflow_dispatch:
 jobs:
   lint-code:
@@ -34,6 +34,6 @@ jobs:
       uses: exuanbo/actions-deploy-gist@v1
       with:
           token: ${{ secrets.TOKEN_ACTION_WRITE_GIST }}
-          gist_id: from_gist_url
+          gist_id: 407ef88a723dde9c54d400c231213abf
           file_path: pylint/pylint.svg
           file_type: text
