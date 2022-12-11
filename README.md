@@ -1,5 +1,9 @@
 # `output_checker`
-![Build](https://github.com/SamHollings/output_checker/actions/workflows/lint.yml/badge.svg)[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Build](https://github.com/SamHollings/output_checker/actions/workflows/pylint.yml/badge.svg)
+![pylint score](https://gist.githubusercontent.com/SamHollings/407ef88a723dde9c54d400c231213abf/raw/6762172adade34788fec8d27c4547ff955c9c6e0/pylint.svg "pylint score")
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 `output_checker` is a tool that allows **analysts** to check if their **code is ok to
 export**
