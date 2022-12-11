@@ -49,7 +49,7 @@ jobs:
         git status
         git add . #outputs/ci-cd/pylint.log outputs/ci-cd/pylint.svg
         git status
-        git commit -m "Auto updating pylint.svg and pylint.log"
+        git commit -m "[skip ci] Auto updating pylint.svg and pylint.log"
         # git fetch origin master
         git push #origin HEAD:master
         
