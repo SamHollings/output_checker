@@ -19,21 +19,31 @@ jobs:
         pip install -r requirements.txt
         pip install pylint pylint-exit anybadge
     - name: Analysing the code with pylint
-      run: |
-        mkdir ./pylint       
-        pylint --recursive=y --output-format=text src | tee ./pylint/pylint.log || pylint-exit $?
+      run: |   
+        pylint --recursive=y --output-format=text src | tee ./outputs/ci-cd/pylint.log || pylint-exit $?
         PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./pylint/pylint.log)
-        anybadge --label=Pylint --file=pylint/pylint.svg --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
+        anybadge --label=Pylint --file=outputs/ci-cd/pylint.svg --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
         echo "Pylint score is $PYLINT_SCORE"
-    - name: upload pylint badge # this brings the badge outside of the action environment so we can use it on the Readme.md
-      uses: actions/upload-artifact@v3
-      with:
-          name: pylint-badge
-          path: pylint/pylint.svg
+#     - name: upload pylint badge # this brings the badge outside of the action environment so we can use it on the Readme.md
+#       uses: actions/upload-artifact@v3
+#       with:
+#           name: pylint-badge
+#           path: outputs/ci-cd/pylint.svg
     - name: Deploy to gist
       uses: exuanbo/actions-deploy-gist@v1
       with:
           token: ${{ secrets.TOKEN_ACTION_WRITE_GIST }}
           gist_id: 407ef88a723dde9c54d400c231213abf
-          file_path: pylint/pylint.svg
+          file_path: outputs/ci-cd/pylint.svg
           file_type: text
+    - name: save the badge to the repo
+      # The badge we created above needs to be accessed by the readme - so we add it to the repo as an output
+      # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.ACTION_REPO_WRITE }}@github.com/${{ github.repository }}
+        git status
+        git add outputs/ci-cd/pylint.log outputs/ci-cd/pylint.svg
+        git commit -m "Auto updating pylint.svg and pylint.log"
+        git fetch origin master
+        git push origin HEAD:master
+        
