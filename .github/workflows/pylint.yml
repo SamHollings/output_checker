@@ -30,3 +30,10 @@ jobs:
       with:
           name: pylint-badge
           path: pylint/pylint.svg
+    - name: Deploy to gist
+      uses: exuanbo/actions-deploy-gist@v1
+      with:
+          token: ${{ secrets.TOKEN_ACTION_WRITE_GIST }}
+          gist_id: from_gist_url
+          file_path: pylint/pylint.svg
+          file_type: text
