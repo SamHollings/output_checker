@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+       token: ${{ secrets.ACTION_REPO_WRITE }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -36,18 +38,18 @@ jobs:
           gist_id: 407ef88a723dde9c54d400c231213abf
           file_path: outputs/ci-cd/pylint.svg
           file_type: text
-#     - name: save the badge to the repo
-#       # The badge we created above needs to be accessed by the readme - so we add it to the repo as an output
-#       # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
-#       run: |
-#         git config --global user.name 'Github Actions'
-#         git config --global user.email 'action@github.com'
-#         # It's getting caught on trying to push to the master - so I expect something wrong with the below:
-#         git remote set-url origin https://x-access-token:${{ secrets.ACTION_REPO_WRITE }}@github.com/${{ github.repository }}
-#         git status
-#         git add . #outputs/ci-cd/pylint.log outputs/ci-cd/pylint.svg
-#         git status
-#         git commit -m "Auto updating pylint.svg and pylint.log"
-#         git fetch origin master
-#         git push origin HEAD:master
+    - name: save the badge to the repo
+      # The badge we created above needs to be accessed by the readme - so we add it to the repo as an output
+      # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
+      run: |
+        git config --global user.name 'Github Actions'
+        git config --global user.email 'action@github.com'
+        # It's getting caught on trying to push to the master - so I expect something wrong with the below:
+        # git remote set-url origin https://x-access-token:${{ secrets.ACTION_REPO_WRITE }}@github.com/${{ github.repository }}
+        git status
+        git add . #outputs/ci-cd/pylint.log outputs/ci-cd/pylint.svg
+        git status
+        git commit -m "Auto updating pylint.svg and pylint.log"
+        # git fetch origin master
+        git push #origin HEAD:master
         
