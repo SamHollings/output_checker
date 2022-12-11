@@ -21,24 +21,27 @@ jobs:
         pip install -r requirements.txt
         pip install pylint pylint-exit anybadge
     - name: Analysing the code with pylint
+      id: pylint
       run: |   
         pylint --recursive=y --output-format=text src | tee ./outputs/ci-cd/pylint.log || pylint-exit $?
         PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./outputs/ci-cd/pylint.log)
         anybadge --label=Pylint --file=outputs/ci-cd/pylint.svg -o --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
         echo "Pylint score is $PYLINT_SCORE"
+      continue-on-error: true
 #     - name: upload pylint badge # this brings the badge outside of the action environment so we can use it on the Readme.md
 #       uses: actions/upload-artifact@v3
 #       with:
 #           name: pylint-badge
 #           path: outputs/ci-cd/pylint.svg
-    - name: Deploy to gist
-      uses: exuanbo/actions-deploy-gist@v1
-      with:
-          token: ${{ secrets.TOKEN_ACTION_WRITE_GIST }}
-          gist_id: 407ef88a723dde9c54d400c231213abf
-          file_path: outputs/ci-cd/pylint.svg
-          file_type: text
-    - name: save the badge to the repo
+#     - name: Deploy to gist
+#       uses: exuanbo/actions-deploy-gist@v1
+#       with:
+#           token: ${{ secrets.TOKEN_ACTION_WRITE_GIST }}
+#           gist_id: 407ef88a723dde9c54d400c231213abf
+#           file_path: outputs/ci-cd/pylint.svg
+#           file_type: text
+    - name: save pylint badge to the repo
+      if: steps.pylint.outcome == 'success'
       # The badge we created above needs to be accessed by the readme - so we add it to the repo as an output
       # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
       run: |
@@ -53,4 +56,7 @@ jobs:
         # git fetch origin master
         git push #origin HEAD:master
       continue-on-error: true
+    - name: raise error if linting steps failed
+      if: steps.pylint.outcome != 'success'
+      run: exit 1
         
