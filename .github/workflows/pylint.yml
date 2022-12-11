@@ -42,7 +42,7 @@ jobs:
       run: |
         git remote set-url origin https://x-access-token:${{ secrets.ACTION_REPO_WRITE }}@github.com/${{ github.repository }}
         git status
-        git add outputs/ci-cd/pylint.log outputs/ci-cd/pylint.svg
+        git add . #outputs/ci-cd/pylint.log outputs/ci-cd/pylint.svg
         git commit -m "Auto updating pylint.svg and pylint.log"
         git fetch origin master
         git push origin HEAD:master
