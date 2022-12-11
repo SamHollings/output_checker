@@ -24,7 +24,7 @@ jobs:
       run: |   
         pylint --recursive=y --output-format=text src | tee ./outputs/ci-cd/pylint.log || pylint-exit $?
         PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./outputs/ci-cd/pylint.log)
-        anybadge --label=Pylint --file=outputs/ci-cd/pylint.svg --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
+        anybadge --label=Pylint --file=outputs/ci-cd/pylint.svg --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green --overwrite
         echo "Pylint score is $PYLINT_SCORE"
 #     - name: upload pylint badge # this brings the badge outside of the action environment so we can use it on the Readme.md
 #       uses: actions/upload-artifact@v3
