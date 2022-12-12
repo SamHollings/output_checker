@@ -1,6 +1,8 @@
 # `output_checker`
-![Build](https://github.com/SamHollings/output_checker/actions/workflows/pylint.yml/badge.svg)
+![Build](https://github.com/SamHollings/output_checker/actions/workflows/ci.yml/badge.svg)
 ![pylint score](./outputs/ci-cd/pylint.svg "pylint score")
+![flake8](./outputs/ci-cd/flake8.svg "flake8 status badge")
+![pytest](./outputs/ci-cd/pytest.svg "pytest status badge")
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
