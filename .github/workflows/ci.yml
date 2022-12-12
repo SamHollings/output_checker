@@ -54,8 +54,8 @@ jobs:
         esac
         return result
        }
-       echo steps.flake8.outcome
-       echo steps.pytest.outcome
+       echo ${steps.flake8.outcome}
+       echo ${steps.pytest.outcome}
        #anybadge --label=flake8 --file=outputs/ci-cd/flake8.svg -o --value={status steps.flake8.outcome} passing=green failing=red
        #anybadge --label=pytest --file=outputs/ci-cd/pytest.svg -o --value={status steps.pytest.outcome} passing=green failing=red
     - name: save badges to the repo
