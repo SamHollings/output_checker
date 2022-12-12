@@ -53,10 +53,8 @@ jobs:
         esac
         return result
        }
-       for test in pytest flake8
-        do
-         anybadge --label=${test} --file=outputs/ci-cd/${test}.svg -o --value={status steps.${test}.outcome} passing=green failing=red
-        done
+       anybadge --label=flake8 --file=outputs/ci-cd/flake8.svg -o --value=status steps.flake8.outcome passing=green failing=red
+       anybadge --label=pytest --file=outputs/ci-cd/pytest.svg -o --value=status steps.pytest.outcome passing=green failing=red
     - name: save badges to the repo
       # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
       run: |
