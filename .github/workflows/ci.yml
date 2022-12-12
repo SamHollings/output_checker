@@ -26,7 +26,7 @@ jobs:
       id: pytest
       run: |
         coverage -m pytest
-        coverage report -m
+        coverage report
       continue-on-error: true
     - name: Running flake8
       id: flake8
