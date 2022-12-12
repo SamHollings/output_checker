@@ -53,8 +53,8 @@ jobs:
         esac
         echo $result
        }
-       anybadge --label=flake8 --file=outputs/ci-cd/flake8.svg -o --value=${{ steps.flake8.outcome }} c=green #$(status steps.flake8.outcome) passing=green failing=red
-       anybadge --label=pytest --file=outputs/ci-cd/pytest.svg -o --value=${{ steps.flake8.outcome }} c=green #$(status steps.pytest.outcome) passing=green failing=red
+       anybadge --label=flake8 --file=outputs/ci-cd/flake8.svg -o --value=$(status ${{ steps.flake8.outcome }}) c=green #$(status steps.flake8.outcome) passing=green failing=red
+       anybadge --label=pytest --file=outputs/ci-cd/pytest.svg -o --value=$(status ${{ steps.flake8.outcome }}) c=green #$(status steps.pytest.outcome) passing=green failing=red
     - name: save badges to the repo
       # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
       run: |
