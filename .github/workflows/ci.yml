@@ -46,9 +46,9 @@ jobs:
       run: |
        status() {
         case $1 in
-         success ) result='passing'
+         success ) $result='passing'
          ;;
-         failure ) result='failing'
+         failure ) $result='failing'
          ;;
         esac
         echo $result
