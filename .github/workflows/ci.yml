@@ -1,11 +1,11 @@
 name: Pylint Flake8 Bandit
 on:
-#   push:
-#    branches:
-#    - main #master
-#   pull_request:
-#    branches:
-#    - main #master
+  push:
+   branches:
+   - main
+  pull_request:
+   branches:
+   - main
   workflow_dispatch:
 jobs:
   lint-code:
