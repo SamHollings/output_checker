@@ -25,7 +25,7 @@ jobs:
     - name: Running pytest (unittest and doctest)
       id: pytest
       run: |
-        coverage -m pytest
+        coverage pytest
         coverage report
       continue-on-error: true
     - name: Running flake8
