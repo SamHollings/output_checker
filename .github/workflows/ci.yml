@@ -51,7 +51,7 @@ jobs:
          failure ) result='failing'
          ;;
         esac
-        echo result
+        echo $result
        }
        anybadge --label=flake8 --file=outputs/ci-cd/flake8.svg -o --value=$(status steps.flake8.outcome) passing=green failing=red
        anybadge --label=pytest --file=outputs/ci-cd/pytest.svg -o --value=$(status steps.pytest.outcome) passing=green failing=red
