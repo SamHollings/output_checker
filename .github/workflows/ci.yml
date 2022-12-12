@@ -1,0 +1,72 @@
+name: Pylint Flake8 Bandit
+on:
+  push:
+   branches:
+   - main
+  pull_request:
+   branches:
+   - main
+  workflow_dispatch:
+jobs:
+  lint-code:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+       token: ${{ secrets.ACTION_REPO_WRITE }}
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Running pytest (unittest and doctest)
+      id: pytest
+      run: |
+        coverage -m pytest
+        coverage report -m
+      continue-on-error: true
+    - name: Running flake8
+      id: flake8
+      run: |
+        flake8 src
+      continue-on-error: true
+    - name: Analysing the code with pylint
+      id: pylint
+      run: |
+        pylint --recursive=y --output-format=text src | tee ./outputs/ci-cd/pylint.log || pylint-exit $?
+        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./outputs/ci-cd/pylint.log)
+        anybadge --label=Pylint --file=outputs/ci-cd/pylint.svg -o --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
+        echo "Pylint score is $PYLINT_SCORE"
+      continue-on-error: true
+    - name: make badges
+      id: badge
+      run: |
+       status() {
+        case $1 in
+         success ) result='passing'
+         ;;
+         failure ) result='failing'
+         ;;
+        esac
+        return result
+       }
+       for test in pytest flake8
+        do
+         anybadge --label=${test} --file=outputs/ci-cd/${test}.svg -o --value={status steps.${test}.outcome} passing=green failing=red
+        done
+    - name: save badges to the repo
+      # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
+      run: |
+        git config --global user.name 'Github Actions'
+        git config --global user.email 'action@github.com'
+        git add .
+        git commit -m "[skip ci] Auto updating badges"
+        git push
+      continue-on-error: true
+    # -name: upload test artifacts
+    - name: raise error if test steps failed
+      if: steps.pylint.outcome != 'success' || steps.pytest.outcome != 'success' || steps.flake8.outcome != 'success'
+      run: exit 1
