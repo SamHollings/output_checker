@@ -4,7 +4,7 @@ import doctest
 import src.make_data
 
 
-def load_tests(loader, tests, ignore):
+def load_tests(loader, tests, ignore):  # pylint: disable=unused-argument
     """This creates a unittest.TestCase from the doctests described in the
     module"""
     tests.addTests(doctest.DocTestSuite(src.make_data))
