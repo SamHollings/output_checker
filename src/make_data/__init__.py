@@ -5,7 +5,6 @@ import pandas as pd
 def test_data() -> pd.DataFrame:
     """Returns a pandas dataframe with some common test cases
     Args:
-        None
     Returns:
         pd.Dataframe: the test data
     Example:

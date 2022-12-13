@@ -12,7 +12,7 @@ import pandas as pd
 def check_series_sdc(column: pd.Series) -> pd.Series:
     """Checks the series following the disclosure control rules
     Attributes:
-        columns (pd.Series): the column being checked provided as a pandas
+        column (pd.Series): the column being checked provided as a pandas
                             Series
     Returns:
         pd.Series: a mask which describes which rows passed and which failed
