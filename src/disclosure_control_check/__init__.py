@@ -19,7 +19,7 @@ def check_series_sdc(column: pd.Series) -> pd.Series:
     Example:
         >>> x = pd.Series([0,1,5,10,11,101], name='count')
         >>> check_series_sdc(x).to_list()
-        [False, False, True, True, False, False]
+        [False, False, False, True, False, False]
     """
 
     divisible_by_five = ((column % 5) == 0).fillna(1)
