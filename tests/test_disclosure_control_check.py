@@ -1,3 +1,4 @@
+"""disclosure_control_check tests"""
 import unittest
 import doctest
 import src.disclosure_control_check

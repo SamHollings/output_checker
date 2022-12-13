@@ -36,7 +36,7 @@ jobs:
     - name: Analysing the code with pylint
       id: pylint
       run: |
-        pylint --recursive=y --output-format=text src | tee ./outputs/ci-cd/pylint.log || pylint-exit $?
+        pylint --recursive=y --output-format=text . | tee ./outputs/ci-cd/pylint.log || pylint-exit $?
         PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./outputs/ci-cd/pylint.log)
         anybadge --label=Pylint --file=outputs/ci-cd/pylint.svg -o --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
         echo "Pylint score is $PYLINT_SCORE"

@@ -30,7 +30,7 @@ testpaths = [
 ]
 
 [tool.pylint.MASTER]
-ignore='docs'
+ignore-patterns=['docs','.venv*','venv*']
 
 [tool.flake8]
 # Rule definitions: http://flake8.pycqa.org/en/latest/user/error-codes.html
