@@ -1,3 +1,4 @@
+"""make_data tests"""
 import unittest
 import doctest
 import src.make_data

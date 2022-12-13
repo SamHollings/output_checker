@@ -1,3 +1,4 @@
+"""disclosure_control_check tests"""
 import unittest
 import doctest
 from src.disclosure_control_check import check_series_sdc
