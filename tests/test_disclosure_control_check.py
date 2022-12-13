@@ -16,6 +16,7 @@ def load_tests(loader, tests, ignore):  # pylint: disable=unused-argument
 
 class TestCheckSeriesSdc(unittest.TestCase):
     """Testing the check_series_sdc function"""
+
     def output_correct(self):
         """checks the output of the function is as expected"""
         data = pd.Series([10, 15, 20, 25, 30])
