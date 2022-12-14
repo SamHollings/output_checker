@@ -22,16 +22,23 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Running pytest (unittest and doctest)
+    - name: Running pytest (unittest, doctest)
       id: pytest
       run: |
-        coverage run -m pytest
-        coverage report
-      continue-on-error: true
+        coverage run -m pytest | tee ./outputs/ci-cd/pytest.log
+      continue-on-error: true 
+    - name: Run coverage report
+      id: coverage
+      run: |  
+        coverage report | tee ./outputs/ci-cd/coverage.log
+        COVERAGE_SCORE=$(sed -n '/TOTAL/s/TOTAL\s[0-9]*\s[0-9]*\s\([0-9]*\)\%/\1/p' ./outputs/ci-cd/coverage.log)
+        anybadge --label=Coverage --file=outputs/ci-cd/coverage.svg -o --value=$COVERAGE_SCORE 20=red 35=orange 50=yellow 100=green
+        echo "Coverage score is $COVERAGE_SCORE"
+      continue-on-error: true  
     - name: Running flake8
       id: flake8
       run: |
-        flake8 src
+        flake8 -v --tee --output-file=./outputs/ci-cd/flake8.log
       continue-on-error: true
     - name: Analysing the code with pylint
       id: pylint
@@ -55,7 +62,7 @@ jobs:
        anybadge --label=flake8 --file=outputs/ci-cd/flake8.svg -o --value=$(status ${{ steps.flake8.outcome }}) "passing"=green "failing"=red
        anybadge --label=pytest --file=outputs/ci-cd/pytest.svg -o --value=$(status ${{ steps.pytest.outcome }}) "passing"=green "failing"=red
     - name: save badges to the repo
-      # if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
+      if: github.event_name == 'push'       # Only run on main branch push (e.g. after pull request merge).
       run: |
         git config --global user.name 'Github Actions'
         git config --global user.email 'action@github.com'
@@ -63,7 +70,14 @@ jobs:
         git commit -m "[skip ci] Auto updating badges"
         git push
       continue-on-error: true
-    # -name: upload test artifacts
+    - name: upload logs to artifacts
+      uses: actions/upload-artifact@v3
+      with:
+          name: ci_logs
+          path: |
+            ./outputs/ci-cd/coverage.log
+            ./outputs/ci-cd/pylint.log
+            ./outputs/ci-cd/flake8.log
     - name: raise error if test steps failed
-      if: steps.pylint.outcome != 'success' || steps.pytest.outcome != 'success' || steps.flake8.outcome != 'success'
+      if: steps.pylint.outcome != 'success' || steps.pytest.outcome != 'success' || steps.flake8.outcome != 'success' || steps.coverage.outcome != 'success'
       run: exit 1
