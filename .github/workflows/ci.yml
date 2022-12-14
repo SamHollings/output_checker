@@ -31,7 +31,7 @@ jobs:
       id: coverage
       run: |  
         coverage report | tee ./outputs/ci-cd/coverage.log
-        COVERAGE_SCORE=$(grep -oP '\d+(?=%)' ./outputs/ci-cd/coverage.log)
+        COVERAGE_SCORE=$(sed -n '/TOTAL/s/TOTAL\s[0-9]*\s[0-9]*\s\([0-9]*\)\%/\1/p' ./outputs/ci-cd/coverage.log)
         anybadge --label=Coverage --file=outputs/ci-cd/coverage.svg -o --value=$COVERAGE_SCORE 20=red 35=orange 50=yellow 100=green
         echo "Coverage score is $COVERAGE_SCORE"
       continue-on-error: true  
