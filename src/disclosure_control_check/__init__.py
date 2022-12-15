@@ -30,6 +30,29 @@ def check_series_sdc(column: pd.Series) -> pd.Series:
     return mask
 
 
+def return_sdc_dataframe_fails(data: pd.DataFrame) -> pd.DataFrame:
+    """Apply the SDC rules to a dataframe, and then returns only the rows /
+    columns which failed
+    Attributes:
+        data (pd.DataFrame): the data being checked provided as a pandas
+                            DataFrame
+    Returns:
+        pd.DataFrame: a mask which describes which rows and columns passed and
+                      which failed
+    Example:
+        >>> #ToDo: add an example for return_sdc_dataframe_fails
+        >>> x_dict = {"place":["York", "Sheffield", "Leeds"], 'count':[0,5,50]}
+        >>> x = pd.DataFrame(x_dict)
+        >>> print(return_sdc_dataframe_fails(x))
+             count
+        0        0
+        1        5
+    """
+    data_mask = data.apply(check_series_sdc, axis=0)  # apply sdc to COLUMNs
+
+    return data[data_mask]
+
+
 if __name__ == "__main__":
     import doctest
 
