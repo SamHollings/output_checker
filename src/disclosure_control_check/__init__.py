@@ -54,9 +54,10 @@ def return_sdc_dataframe_fails(data: pd.DataFrame) -> pd.DataFrame:
     """
     data_numeric = data.select_dtypes(include=np.number)
 
-    data_mask = data_numeric.apply(check_series_sdc, axis=0)  # apply sdc to COLUMNs
+    # apply sdc to COLUMNs
+    data_mask = data_numeric.apply(check_series_sdc, axis=0)
 
-    return data[~data_mask].dropna(axis=1, how='all').dropna(axis=0, how='all')
+    return data[~data_mask].dropna(axis=1, how="all").dropna(axis=0, how="all")
 
 
 if __name__ == "__main__":
