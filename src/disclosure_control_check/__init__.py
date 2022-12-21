@@ -7,6 +7,7 @@ TODO: apply the above across a dataframe to designated columns returning
     column and row IDs of failures.
 """
 import pandas as pd
+import numpy as np
 
 
 def check_series_sdc(column: pd.Series) -> pd.Series:
@@ -37,20 +38,25 @@ def return_sdc_dataframe_fails(data: pd.DataFrame) -> pd.DataFrame:
         data (pd.DataFrame): the data being checked provided as a pandas
                             DataFrame
     Returns:
-        pd.DataFrame: a mask which describes which rows and columns passed and
-                      which failed
+        pd.DataFrame: a mask which contains the failure entries
     Example:
         >>> #ToDo: add an example for return_sdc_dataframe_fails
-        >>> x_dict = {"place":["York", "Sheffield", "Leeds"], 'count':[0,5,50]}
+        >>> x_dict = {"place":["York", "Sheffield", "Leeds"],
+        ... 'count':[0,5,50],
+        ... 'count2':[100,20,105],
+        ... 'count3':[0,30, 200]
+        ... }
         >>> x = pd.DataFrame(x_dict)
         >>> print(return_sdc_dataframe_fails(x))
-             count
-        0        0
-        1        5
+           count  count3
+        0    0.0     0.0
+        1    5.0     NaN
     """
-    data_mask = data.apply(check_series_sdc, axis=0)  # apply sdc to COLUMNs
+    data_numeric = data.select_dtypes(include=np.number)
 
-    return data[data_mask]
+    data_mask = data_numeric.apply(check_series_sdc, axis=0)  # apply sdc to COLUMNs
+
+    return data[~data_mask].dropna(axis=1, how='all').dropna(axis=0, how='all')
 
 
 if __name__ == "__main__":
