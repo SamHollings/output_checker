@@ -25,14 +25,14 @@ jobs:
     - name: Running pytest (unittest, doctest)
       id: pytest
       run: |
-        coverage run -m pytest | tee ./outputs/ci-cd/pytest.log
+        python -m coverage run -m pytest | tee ./outputs/ci-cd/pytest.log
       continue-on-error: true 
     - name: Run coverage report
       id: coverage
       run: |  
-        coverage report | tee ./outputs/ci-cd/coverage.log
-        COVERAGE_SCORE=$(sed -n '/TOTAL/s/TOTAL\s[0-9]*\s[0-9]*\s\([0-9]*\)\%/\1/p' ./outputs/ci-cd/coverage.log)
-        anybadge --label=Coverage --file=outputs/ci-cd/coverage.svg -o --value=$COVERAGE_SCORE 20=red 35=orange 50=yellow 100=green
+        python -m coverage report | tee ./outputs/ci-cd/coverage.log
+        COVERAGE_SCORE=$(sed -n 's/TOTAL\s*[0-9]*\s*[0-9]*\s*\([0-9]*\)\%/\1/p' ./outputs/ci-cd/coverage.log)
+        python -m anybadge --label=Coverage --file=outputs/ci-cd/coverage.svg -o --value=$COVERAGE_SCORE 20=red 35=orange 50=yellow 100=green
         echo "Coverage score is $COVERAGE_SCORE"
       continue-on-error: true  
     - name: Running flake8
