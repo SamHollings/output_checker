@@ -23,7 +23,7 @@ def check_series_sdc(column: pd.Series) -> pd.Series:
     """
 
     divisible_by_five = ((column % 5) == 0).fillna(1)
-    greater_equal_ten = column >= 10
+    greater_equal_ten = abs(column) >= 10
 
     mask = divisible_by_five.combine(greater_equal_ten, min, fill_value=0)
 
