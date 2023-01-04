@@ -21,7 +21,6 @@ def check_series_sdc(column: pd.Series) -> pd.Series:
         >>> check_series_sdc(x).to_list()
         [False, False, False, True, False, False]
     """
-
     divisible_by_five = ((column % 5) == 0).fillna(1)
     greater_equal_ten = abs(column) >= 10
 
