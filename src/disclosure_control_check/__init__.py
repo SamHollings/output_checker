@@ -9,7 +9,9 @@ TODO: create entitiy recongition of a string function
 """
 import pandas as pd
 import numpy as np
+import spacy
 
+nlp = spacy.load("en_core_web_md")
 
 def check_series_sdc(column: pd.Series) -> pd.Series:
     """Checks the series following the disclosure control rules
@@ -60,6 +62,23 @@ def return_sdc_dataframe_fails(data: pd.DataFrame) -> pd.DataFrame:
 
     return data[~data_mask].dropna(axis=1, how="all").dropna(axis=0, how="all")
 
+def check_string_entities(text: str, nlp:spacy.lang = nlp, patterns: list = [{"TYPE": "EMAIL"}, {"TYPE": "PHONE"}, {"TYPE": "NAME"}]) -> str:
+    """Checks the string for entities
+    Returns:
+        A string containing the found entities
+    Example:
+        >>> x = "Apple is looking at buying U.K. startup for $1 billion"
+        >>> check_string_entities(x)
+        [['Apple', 0, 5, 'ORG'], ['U.K.', 27, 31, 'GPE'], ['$1 billion', 44, 54, 'MONEY']]
+    """
+
+    # Create doc from text. Doc is a convention in spacy
+    doc = nlp(text)
+    entities = []
+    print("Entities:")
+    for ent in doc.ents:
+        entities.append([ent.text, ent.start_char, ent.end_char, ent.label_])
+    return entities
 
 
 if __name__ == "__main__":
