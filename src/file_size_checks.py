@@ -6,10 +6,6 @@ import pathlib
 import os
 
 
-def make_file_of_specified_size(file_path, size_in_mb):
-    """"""
-
-
 def get_file_size_mb(file_path: pathlib.Path) -> float:
     """Returns the size of the file (in megabytes) at the supplied filepath
     Attributes:
