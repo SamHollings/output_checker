@@ -62,6 +62,7 @@ def return_sdc_dataframe_fails(data: pd.DataFrame) -> pd.DataFrame:
 
     return data[~data_mask].dropna(axis=1, how="all").dropna(axis=0, how="all")
 
+  
 def check_string_entities(text: str, nlp:spacy.lang = nlp, patterns: list = [{"TYPE": "EMAIL"}, {"TYPE": "PHONE"}, {"TYPE": "NAME"}]) -> str:
     """Checks the string for entities
     Returns:
@@ -80,7 +81,7 @@ def check_string_entities(text: str, nlp:spacy.lang = nlp, patterns: list = [{"T
         entities.append([ent.text, ent.start_char, ent.end_char, ent.label_])
     return entities
 
-
+  
 if __name__ == "__main__":
     import doctest
 
