@@ -4,7 +4,7 @@ def create_dataframe():
   """Creates a Pandas DataFrame with realistic personality identifiable data."""
 
   dictionary = {
-      'NHSNUMBER': ['1234567890', '9876543210', '0123456789'],
+      'NHSNUMBER_DEID': ['1234567890', '9876543210', '0123456789'],
       'GENDER': ['Male', 'Female', 'Non-binary'],
       'DIAGNOSIS': ['Depression', 'Anxiety', 'Bipolar disorder'],
   }
