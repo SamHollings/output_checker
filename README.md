@@ -11,6 +11,22 @@
 `output_checker` is a tool that allows **analysts** to check if their **code is ok to
 export**
 
+This will contain functions to do a few different checks for both data outputs and code.
+
+**data outputs**:
+- [ ] [Statistical Disclosure Control](./src/disclosure_control_check)
+
+**code outputs**: 
+- [ ] *ToDo*: Large files
+- [ ] *ToDo*: Files which are too long
+- [ ] *ToDo*: Entity Recognition
+- [ ] *ToDo*: Embedded tables
+- [ ] *ToDo*: notebooks without cleared outputs
+
+Initially, we need to make simple functions which address the above, then we can build other functions which will apply them multiple files.
+
+A core part of the use-case is that there is that people can be alerted what issues there are, in which files.
+
 It does this by running a few simple checks. The envisaged workflow is:
 ```mermaid
 graph LR
@@ -20,6 +36,8 @@ graph LR
     B -->|Fail| E[Identifies problems];
     C -->|Pass| D[Ok to output];
     C -->|Fail| E[Identifies problems];
+
+    click A "https://github.com/SamHollings/output_checker/tree/main/src/disclosure_control_check" "Disclosure Control code" _blank
 ```
 
 ## Getting started
