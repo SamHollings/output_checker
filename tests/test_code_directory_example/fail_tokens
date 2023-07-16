@@ -1,5 +1,11 @@
 import random
 
+databricks_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+
+gitlab_token = "8h8qtkw98ce0v6nt3xku"
+
+## commented token 8h8rtkw56ce0v6nt3xne
+
 def generate_random_number():
   """Generates a random number between 1 and 100."""
 
@@ -16,8 +22,6 @@ def main():
 
 if __name__ == "__main__":
   main()
-
-databricks_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 
 def print_databricks_token():
   """Prints the Databricks token."""
