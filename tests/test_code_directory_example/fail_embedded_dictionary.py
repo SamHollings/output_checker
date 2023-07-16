@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def create_dataframe():
   """Creates a Pandas DataFrame with realistic personality identifiable data."""
 
@@ -12,8 +13,10 @@ def create_dataframe():
   dataframe = pd.DataFrame.from_dict(dictionary)
 
   return dataframe
+  
 
 if __name__ == "__main__":
   dataframe = create_dataframe()
 
   print(dataframe)
+  
