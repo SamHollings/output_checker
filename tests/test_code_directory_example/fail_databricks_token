@@ -1,0 +1,28 @@
+import random
+
+def generate_random_number():
+  """Generates a random number between 1 and 100."""
+
+  return random.randint(1, 100)
+
+def print_random_number():
+  """Prints a random number between 1 and 100."""
+
+  random_number = generate_random_number()
+  print(random_number)
+
+def main():
+  print_random_number()
+
+if __name__ == "__main__":
+  main()
+
+databricks_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+
+def print_databricks_token():
+  """Prints the Databricks token."""
+
+  print(databricks_token)
+
+if __name__ == "__main__":
+  print_databricks_token()
