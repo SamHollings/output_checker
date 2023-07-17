@@ -1,3 +1,4 @@
+"""This is not functional code - it is used to test the code checking functions"""
 import pandas as pd
 
 
