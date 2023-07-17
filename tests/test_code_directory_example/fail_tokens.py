@@ -1,3 +1,4 @@
+"""This is not functional code - it is used to test the code checking functions"""
 import random
 
 databricks_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
