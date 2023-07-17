@@ -1,4 +1,4 @@
-c.# `output_checker`
+# `output_checker`
 ![Build](https://github.com/SamHollings/output_checker/actions/workflows/ci.yml/badge.svg)
 ![pylint score](./outputs/ci-cd/pylint.svg "pylint score")
 ![flake8](./outputs/ci-cd/flake8.svg "flake8 status badge")
