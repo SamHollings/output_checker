@@ -2,9 +2,9 @@
 battery of checks"""
 import glob
 import pandas as pd
-import file_size_checks
+import src.file_size_checks
 
-default_checks = dict(size_mb=file_size_checks.get_file_size_mb,
+default_checks = dict(size_mb=src.file_size_checks.get_file_size_mb,
                       #length_rows=file_size_checks.get_file_length_rows
                       )
 
