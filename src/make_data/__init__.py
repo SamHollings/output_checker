@@ -16,10 +16,10 @@ def test_data() -> pd.DataFrame:
     """
     df_test_data = pd.DataFrame(
         {
-            'id':[0, 1, 2, 3, 4, 5],
-            'count':[0, 1, 5, 10, 11, 101],
-            'cat_field':["a", "b", "a", "John Doe", "a", "b"],
-            'freetext_field':[
+            'id': [0, 1, 2, 3, 4, 5],
+            'count': [0, 1, 5, 10, 11, 101],
+            'cat_field': ["a", "b", "a", "John Doe", "a", "b"],
+            'freetext_field': [
                 "",
                 "a",
                 """I thought Doctor Smith, who lived at 1 privett drive, was

@@ -10,7 +10,7 @@ class TestPrepDfForTests(unittest.TestCase):
 
     def test_output(self):
         """Simply do an output test to ensure basic function"""
-        df_test = pd.DataFrame({'col1':["dog", "cat"], 'count':[3, 4]})
+        df_test = pd.DataFrame({'col1': ["dog", "cat"], 'count': [3, 4]})
         expected = ["dog", 3, "cat", 4]
         result = utils.prep_df_for_tests(df_test)
         error_message = "squashed dataframe didn't match list"

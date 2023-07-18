@@ -33,7 +33,7 @@ def get_file_length_rows(file_path: pathlib.Path, encoding) -> int:
         >>> get_file_length_rows("tests/ten_line_file.txt")
         10
     """
-    
+
     with open(file_path, 'r', encoding=encoding) as file:
         row_count = sum(1 for _ in file)
 

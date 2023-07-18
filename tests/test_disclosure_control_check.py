@@ -50,7 +50,7 @@ class TestReturnSdcDataframeFails(unittest.TestCase):
         test_df = pd.DataFrame(test_dict)
         result = src.disclosure_control_check.return_sdc_dataframe_fails(test_df)
         expected = pd.DataFrame(
-            {'count':[0.0, 5.0], 'count3':[0.0, np.NaN]}, index=[0, 1]
+            {'count': [0.0, 5.0], 'count3': [0.0, np.NaN]}, index=[0, 1]
         )
         self.assertEqual(
             utils.prep_df_for_tests(result),

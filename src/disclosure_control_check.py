@@ -68,7 +68,7 @@ default_patterns = [{"TYPE": "EMAIL"}, {"TYPE": "PHONE"}, {"TYPE": "NAME"}]
 
 
 def check_string_entities(text: str, nlp: spacy.lang = nlp_model,
-                          #patterns: list = default_patterns
+                          # patterns: list = default_patterns
                           ) -> str:
     """Checks the string for entities
     Returns:
