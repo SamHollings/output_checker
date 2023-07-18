@@ -38,7 +38,7 @@ ignore-patterns=['docs','.venv*','venv*']
 # W503: line break before binary operator
 exclude = ['.venv*','venv*','__pycache__','node_modules','bower_components',
     'migrations', 'docs', 'test_code_directory_example', 'test_data_directory_example', 'test_get_filepaths_in_directory']
-ignore = ['D203','W503']
+ignore = ['D203','W503','E501']
 max-complexity = 9
 # max-line-length = 88
 extend-ignore = 'E203'

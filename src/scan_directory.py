@@ -4,9 +4,7 @@ import glob
 import pandas as pd
 import src.file_size_checks
 
-default_checks = dict(size_mb=src.file_size_checks.get_file_size_mb,
-                      #length_rows=file_size_checks.get_file_length_rows
-                      )
+default_checks = {'size_mb':src.file_size_checks.get_file_size_mb,}
 
 
 def get_all_filepaths_in_directory(dir_path):
@@ -30,7 +28,7 @@ def scan_directory(dir_path, checks=default_checks):
     """
     list_file_paths = get_all_filepaths_in_directory(dir_path)
 
-    df_files = pd.DataFrame(dict(path=list_file_paths))
+    df_files = pd.DataFrame({'path':list_file_paths})
 
     for check_name, check_func in checks.items():
         df_files[check_name] = df_files.apply(lambda x: check_func(x['path']),

@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 import spacy
 
-nlp = spacy.load("en_core_web_md")
+nlp_model = spacy.load("en_core_web_md")
 
 
 def check_series_sdc(column: pd.Series) -> pd.Series:
@@ -67,8 +67,9 @@ def return_sdc_dataframe_fails(data: pd.DataFrame) -> pd.DataFrame:
 default_patterns = [{"TYPE": "EMAIL"}, {"TYPE": "PHONE"}, {"TYPE": "NAME"}]
 
 
-def check_string_entities(text: str, nlp: spacy.lang = nlp,
-                          patterns: list = default_patterns) -> str:
+def check_string_entities(text: str, nlp: spacy.lang = nlp_model,
+                          #patterns: list = default_patterns
+                          ) -> str:
     """Checks the string for entities
     Returns:
         A string containing the found entities

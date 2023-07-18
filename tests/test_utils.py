@@ -1,8 +1,8 @@
 """utils tests"""
 
-import pandas as pd
 import unittest
-import src.utils as utils
+import pandas as pd
+from src import utils
 
 
 class TestPrepDfForTests(unittest.TestCase):
@@ -10,9 +10,9 @@ class TestPrepDfForTests(unittest.TestCase):
 
     def test_output(self):
         """Simply do an output test to ensure basic function"""
-        df = pd.DataFrame(dict(col1=["dog", "cat"], count=[3, 4]))
+        df_test = pd.DataFrame({'col1':["dog", "cat"], 'count':[3, 4]})
         expected = ["dog", 3, "cat", 4]
-        result = utils.prep_df_for_tests(df)
+        result = utils.prep_df_for_tests(df_test)
         error_message = "squashed dataframe didn't match list"
         self.assertEqual(result, expected, error_message)
 

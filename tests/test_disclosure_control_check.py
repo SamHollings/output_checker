@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import src.disclosure_control_check as src_disc
 import src.make_data
-import src.utils as utils
+from src import utils
 
 
 def load_tests(loader, tests, ignore):  # pylint: disable=unused-argument
@@ -41,16 +41,16 @@ class TestReturnSdcDataframeFails(unittest.TestCase):
 
     def test_output_correct(self):
         """checks the output of the function is as expected"""
-        x_dict = {
+        test_dict = {
             "place": ["York", "Sheffield", "Leeds"],
             "count": [0, 5, 50],
             "count2": [100, 20, 105],
             "count3": [0, 30, 200],
         }
-        x = pd.DataFrame(x_dict)
-        result = src.disclosure_control_check.return_sdc_dataframe_fails(x)
+        test_df = pd.DataFrame(test_dict)
+        result = src.disclosure_control_check.return_sdc_dataframe_fails(test_df)
         expected = pd.DataFrame(
-            dict(count=[0.0, 5.0], count3=[0.0, np.NaN]), index=[0, 1]
+            {'count':[0.0, 5.0], 'count3':[0.0, np.NaN]}, index=[0, 1]
         )
         self.assertEqual(
             utils.prep_df_for_tests(result),

@@ -22,7 +22,7 @@ def get_file_size_mb(file_path: pathlib.Path) -> float:
     return size_in_megabytes
 
 
-def get_file_length_rows(file_path: pathlib.Path, **kwargs) -> int:
+def get_file_length_rows(file_path: pathlib.Path, encoding) -> int:
     """Returns the number of rows in the file at the supplied filepath
     Attributes:
         file_path (pathlib.Path): the path to the file to be checked
@@ -33,8 +33,8 @@ def get_file_length_rows(file_path: pathlib.Path, **kwargs) -> int:
         >>> get_file_length_rows("tests/ten_line_file.txt")
         10
     """
-
-    with open(file_path, 'r', **kwargs) as file:
+    
+    with open(file_path, 'r', encoding=encoding) as file:
         row_count = sum(1 for _ in file)
 
     return row_count
