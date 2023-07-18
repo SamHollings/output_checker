@@ -13,6 +13,7 @@ import spacy
 
 nlp = spacy.load("en_core_web_md")
 
+
 def check_series_sdc(column: pd.Series) -> pd.Series:
     """Checks the series following the disclosure control rules
     Attributes:
@@ -62,8 +63,12 @@ def return_sdc_dataframe_fails(data: pd.DataFrame) -> pd.DataFrame:
 
     return data[~data_mask].dropna(axis=1, how="all").dropna(axis=0, how="all")
 
-  
-def check_string_entities(text: str, nlp:spacy.lang = nlp, patterns: list = [{"TYPE": "EMAIL"}, {"TYPE": "PHONE"}, {"TYPE": "NAME"}]) -> str:
+
+default_patterns = [{"TYPE": "EMAIL"}, {"TYPE": "PHONE"}, {"TYPE": "NAME"}]
+
+
+def check_string_entities(text: str, nlp: spacy.lang = nlp,
+                          patterns: list = default_patterns) -> str:
     """Checks the string for entities
     Returns:
         A string containing the found entities
@@ -81,7 +86,7 @@ def check_string_entities(text: str, nlp:spacy.lang = nlp, patterns: list = [{"T
         entities.append([ent.text, ent.start_char, ent.end_char, ent.label_])
     return entities
 
-  
+
 if __name__ == "__main__":
     import doctest
 

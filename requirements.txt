@@ -7,6 +7,7 @@ toml
 
 #analysis
 pandas
+spacy
 
 # test
 coverage
