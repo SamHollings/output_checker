@@ -15,11 +15,11 @@ def test_data() -> pd.DataFrame:
         'John Doe'
     """
     df_test_data = pd.DataFrame(
-        dict(
-            id=[0, 1, 2, 3, 4, 5],
-            count=[0, 1, 5, 10, 11, 101],
-            cat_field=["a", "b", "a", "John Doe", "a", "b"],
-            freetext_field=[
+        {
+            'id': [0, 1, 2, 3, 4, 5],
+            'count': [0, 1, 5, 10, 11, 101],
+            'cat_field': ["a", "b", "a", "John Doe", "a", "b"],
+            'freetext_field': [
                 "",
                 "a",
                 """I thought Doctor Smith, who lived at 1 privett drive, was
@@ -29,7 +29,7 @@ def test_data() -> pd.DataFrame:
                  H00 V01 Z02 C05 F02 """,
                 None,
             ],
-        )
+        }
     )
 
     return df_test_data
