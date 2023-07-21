@@ -19,18 +19,33 @@ def load_tests(loader, tests, ignore):  # pylint: disable=unused-argument
 class TestCheckSeriesSdc(unittest.TestCase):
     """Testing the check_series_sdc function"""
 
-    def test_output_correct(self):
+    def test_output_correct_all_true(self):
         """checks the output of the function is as expected"""
 
         self.assertEqual(src_disc.check_series_sdc(pd.Series([10, 15, 20, 25, 30])).tolist(),
                          pd.Series([True, True, True, True, True]).tolist(),
                          "incorrect check for sdc")
-        self.assertEqual(src_disc.check_series_sdc(pd.Series([10, 15, 20, 25, 30])).tolist(),
-                         pd.Series([True, True, True, True, True]).tolist(),
+
+    def test_output_correct_small_values(self):
+        """Tests the function can identify small values"""
+        self.assertEqual(src_disc.check_series_sdc(pd.Series([5, 30, 1005, -3, -100])).tolist(),
+                         pd.Series([False, True, True, False, True]).tolist(),
                          "incorrect check for sdc")
-        self.assertEqual(src_disc.check_series_sdc(pd.Series([5, 31, 1005, -5, -100])).tolist(),
-                         pd.Series([False, False, True, False, True]).tolist(),
+
+    def test_output_correct_unrounded_values(self):
+        """Tests the function can identify unrounded values"""
+        self.assertEqual(src_disc.check_series_sdc(pd.Series([5, 31, 1005, -10, -100])).tolist(),
+                         pd.Series([False, False, True, True, True]).tolist(),
                          "incorrect check for sdc")
+
+    def test_output_correct_string_errors(self):
+        """Tests the function can identify strings"""
+        self.assertEqual(src_disc.check_series_sdc(pd.Series(["Egg", 25, -15, "Adam", 10052020])).tolist(),
+                         pd.Series([False, True, True, False, True]).tolist(),
+                         "incorrect check for sdc")
+
+    def test_output_correct_mixed_errors(self):
+        """Tests the function against a mixture of errors at the same time"""
         self.assertEqual(src_disc.check_series_sdc(pd.Series(["Egg", 27, -17, "Adam", 10052022])).tolist(),
                          pd.Series([False, False, False, False, False]).tolist(),
                          "incorrect check for sdc")
