@@ -14,6 +14,49 @@ import spacy
 nlp_model = spacy.load("en_core_web_md")
 
 
+def is_float(input_value):
+    """checks if some input can be made into a float
+
+    Example:
+        >>> is_float("-5.0")
+        True
+    """
+    try:
+        float(input_value)
+        return True
+    except ValueError:
+        return False
+
+
+def divisible_by_five(input_value):
+    """Checks if some input is divisible by 5. Also fails if non number value provided.
+
+    Example:
+        >>> divisible_by_five(1)
+        False
+    """
+    try:
+        # ToDo: consider how it could handle strings which can be converted numbers
+        return input_value % 5 == 0
+    except (TypeError, ValueError):
+        return False
+
+
+def greater_equal_ten(input_value):
+    """Checks if the absolute value of some input is >=10. Also fails if
+    non-number value provided.
+
+    Example:
+        >>> greater_equal_ten(11)
+        True
+    """
+    try:
+        # ToDo: consider how it could handle strings which can be converted numbers
+        return abs(input_value) >= 10
+    except (TypeError, ValueError):
+        return False
+
+
 def check_series_sdc(column: pd.Series) -> pd.Series:
     """Checks the series following the disclosure control rules
     Attributes:
@@ -27,10 +70,14 @@ def check_series_sdc(column: pd.Series) -> pd.Series:
         [False, False, False, True, False, False]
     """
 
-    divisible_by_five = ((column % 5) == 0).fillna(1)
-    greater_equal_ten = column >= 10
+    df_masks = pd.DataFrame({'non_numeric_values': column.apply(is_float),
+                             'divisible_by_five': column.apply(divisible_by_five),  # ((column % 5) == 0).fillna(1),
+                             'greater_equal_ten': column.apply(greater_equal_ten),  # abs(column) >= 10,
+                             })
 
-    mask = divisible_by_five.combine(greater_equal_ten, min, fill_value=0)
+    mask = df_masks.min(axis=1)
+
+    # mask = divisible_by_five.combine(greater_equal_ten, min, fill_value=0)
 
     return mask
 
@@ -82,7 +129,6 @@ def check_string_entities(text: str, nlp: spacy.lang = nlp_model,
     # Create doc from text. Doc is a convention in spacy
     doc = nlp(text)
     entities = []
-    print("Entities:")
     for ent in doc.ents:
         entities.append([ent.text, ent.start_char, ent.end_char, ent.label_])
     return entities

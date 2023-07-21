@@ -30,7 +30,7 @@ def get_file_length_rows(file_path: pathlib.Path, encoding) -> int:
     Returns:
         int: the number of rows in the file
     Example:
-        >>> get_file_length_rows("tests/ten_line_file.txt")
+        >>> get_file_length_rows("tests/ten_line_file.txt", encoding="utf-8")
         10
     """
 
